@@ -3,6 +3,8 @@
  */
 package ru.billing.client;
 
+import ru.billing.exceptions.CatalogLoadException;
+import ru.billing.exceptions.ItemAlreadyExistsException;
 import ru.billing.stocklist.*;
 import java.util.Date;
 
@@ -42,11 +44,16 @@ public class App {
         System.out.println(foodItem);
 
         ItemCatalog itemCatalog = new ItemCatalog();
-        itemCatalog.addItem(obj1);
-        itemCatalog.addItem(obj2);
-        itemCatalog.addItem(obj3);
-        itemCatalog.addItem(foodObj1);
-        itemCatalog.addItem(foodObj2);
+        try {
+
+            itemCatalog.addItem(obj1);
+            itemCatalog.addItem(obj2);
+            itemCatalog.addItem(obj3);
+            itemCatalog.addItem(foodObj1);
+            itemCatalog.addItem(foodObj2);
+        } catch (ItemAlreadyExistsException e) {
+            e.printStackTrace();
+        }
 
         long beginHT = new Date().getTime();
         for (int i = 0; i < 100000; i++) {
@@ -64,7 +71,12 @@ public class App {
         System.out.println("In ArrayList: " + (endAL - beginAL));
 
         CatalogLoader loader = new CatalogStubLoader();
-        loader.load(itemCatalog);
+        try {
+
+            loader.load(itemCatalog);
+        } catch (CatalogLoadException e) {
+            e.printStackTrace();
+        }
 
     }
 }

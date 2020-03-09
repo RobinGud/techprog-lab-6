@@ -3,6 +3,8 @@ package ru.billing.stocklist;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ru.billing.exceptions.ItemAlreadyExistsException;
+
 /**
  * ItemCatalog
  */
@@ -12,7 +14,11 @@ public class ItemCatalog {
     private HashMap<Integer, GenericItem> catalog = new HashMap<Integer, GenericItem>();
     private ArrayList<GenericItem> ALCatalog = new ArrayList<GenericItem>();
 
-    public void addItem(GenericItem item) {
+    public void addItem(GenericItem item) throws ItemAlreadyExistsException {
+        if (catalog.containsKey(item.getID())) {
+            throw new ItemAlreadyExistsException();
+        }
+
         catalog.put(item.getID(), item);
         ALCatalog.add(item);
     }
