@@ -33,7 +33,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'ru.billing.client.App'
+    mainClassName = 'sync.U1901Main'
 }
 
 test {
