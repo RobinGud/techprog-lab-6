@@ -78,5 +78,12 @@ public class App {
             e.printStackTrace();
         }
 
+        CatalogLoader fileLoader = new CatalogFileLoader("list.lst");
+        try {
+            fileLoader.load(itemCatalog);
+        } catch (CatalogLoadException e) {
+            e.printStackTrace();
+        }
+
     }
 }

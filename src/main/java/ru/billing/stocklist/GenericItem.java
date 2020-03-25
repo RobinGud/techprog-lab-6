@@ -54,7 +54,7 @@ public class GenericItem {
     static int currentID = 0;
 
     public GenericItem(int ID, String name, float price, GenericItem analogObj, Category category) {
-        this.ID = ID;
+        this.ID = GenericItem.currentID++;
         this.name = name;
         this.price = price;
         this.analogObj = analogObj;
