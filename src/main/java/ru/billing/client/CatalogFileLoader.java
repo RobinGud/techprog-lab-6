@@ -3,6 +3,7 @@ package ru.billing.client;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class CatalogFileLoader implements CatalogLoader {
     @Override
     public void load(ItemCatalog itemCatalog) throws CatalogLoadException {
         File f = new File(fileName);
-        FileInputStream fis;
+        FileInputStream fis = null;
         String line;
         try {
             fis = new FileInputStream(f);
@@ -49,8 +50,12 @@ public class CatalogFileLoader implements CatalogLoader {
         } catch (ItemAlreadyExistsException e) {
             e.printStackTrace();
             throw new CatalogLoadException();
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
-
-// dgsdvdsv
