@@ -52,7 +52,9 @@ public class CatalogFileLoader implements CatalogLoader {
             throw new CatalogLoadException();
         } finally {
             try {
-                fis.close();
+                if (fis != null) {
+                    fis.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
